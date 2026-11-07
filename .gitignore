@@ -1,0 +1,19 @@
+@"
+# Python / backend
+back/venv/
+back/.env
+back/app.db
+back/uploads/
+__pycache__/
+*.pyc
+
+# Frontend
+front/node_modules/
+front/dist/
+
+# General
+.env
+.env.*
+*.log
+.vscode/
+"@ | Set-Content .gitignore -Encoding ascii
