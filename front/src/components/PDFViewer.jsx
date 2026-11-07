@@ -9,13 +9,15 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString()
 
+const API = import.meta.env.VITE_API_URL || ''
+
 export default function PDFViewer({ docId, page, onPageChange }) {
   const [numPages, setNumPages] = useState(0)
 
   // sends the login token when react-pdf downloads the PDF
   const fileProp = useMemo(
     () => ({
-      url: `/api/documents/${docId}/file`,
+      url: `${API}/api/documents/${docId}/file`,
       httpHeaders: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     }),
     [docId]
@@ -24,7 +26,7 @@ export default function PDFViewer({ docId, page, onPageChange }) {
   if (!docId) return null
 
   return (
-    <div className="w-[460px] shrink-0 border-l border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex flex-col">
+    <div className="w-[460px] shrink-0 flex flex-col bg-white dark:bg-slate-800">
       <div className="flex items-center justify-between p-3 border-b border-slate-200 dark:border-slate-700 text-sm">
         <button
           onClick={() => onPageChange(Math.max(1, page - 1))}
